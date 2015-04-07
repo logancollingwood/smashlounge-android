@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -114,23 +115,16 @@ public class techDetail extends ActionBarActivity {
                     String webmUrl = "http://zippy.gfycat.com/" + url + ".webm";
                     Log.d(TAG, url + " " + gifDesc);
                     MediaPlayer mediaPlayer = new MediaPlayer();
-
-                    try {
-                        mediaPlayer.setDataSource(webmUrl);
-                        mediaPlayer.prepareAsync(); // might take long! (for buffering, etc)
-
-                        mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                            @Override
-                            public void onPrepared(MediaPlayer mp) {
-                                mp.start();
-                            }
-                        });
-
-                    } catch (IOException e) {
-                        Log.d(TAG, "unable to play webm");
-                        return;
-                    }
-
+                    VideoView vid = (VideoView) findViewById(R.id.videoView);
+                    vid.setVideoPath(webmUrl);
+                    vid.start();
+                    vid.setMinimumWidth(30);
+                    vid.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                        @Override
+                        public void onPrepared(MediaPlayer mp) {
+                            mp.setLooping(true);
+                        }
+                    });
 
                 }
 
