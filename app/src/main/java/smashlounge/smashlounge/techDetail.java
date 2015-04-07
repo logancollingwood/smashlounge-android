@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.VideoView;
 
@@ -103,6 +104,8 @@ public class techDetail extends ActionBarActivity {
 
                 //Now let's grab gifs!
                 gifJson = json.getJSONArray("gifs");
+
+                LinearLayout lm = (LinearLayout) findViewById(R.id.linearTechGif);
 
                 Log.d(TAG, "gif JSON: " + gifJson.toString());
                 for (int i = 0; i <= gifJson.length()-1; i++) {
