@@ -124,14 +124,16 @@ public class techniques extends ActionBarActivity {
         @Override
         public void useResult(Context context, String result) {
             JSONObject json = null;
+
             try {
                 json = new JSONObject(result);
             } catch (JSONException e) {
                 Log.e("JSON Parser", "Error parsing data " + e.toString());
-
+                return;
             }
             try {
                 // Getting JSON Array
+                Log.d(TAG, json.toString());
                 techArr = json.getJSONArray(jsonKey);
 
                 for (int i = 0; i < techArr.length()-1; i++) {
