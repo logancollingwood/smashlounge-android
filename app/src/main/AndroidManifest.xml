@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="smashlounge.smashlounge" >
 
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -24,10 +27,10 @@
             android:name=".characters"
             android:label="@string/title_activity_characters" >
         </activity>
+        <activity
+            android:name=".techDetail"
+            android:label="@string/title_activity_tech_detail" >
+        </activity>
     </application>
-
-
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.INTERNET"/>
 
 </manifest>

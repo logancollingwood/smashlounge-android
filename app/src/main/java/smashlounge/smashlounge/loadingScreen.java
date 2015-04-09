@@ -16,9 +16,9 @@ public class loadingScreen extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading_screen);
-
         initType();
     }
+
     public void loadChars(View view) {
         Intent intent = new Intent(this, characters.class);
         startActivity(intent);
@@ -32,17 +32,18 @@ public class loadingScreen extends ActionBarActivity {
         String fontPath = "fonts/Quicksand-Regular.ttf";
 
         // text view label
-        TextView slName = (TextView) findViewById(R.id.sl);
-        TextView email = (TextView) findViewById(R.id.emailField);
-        TextView pw = (TextView) findViewById(R.id.pwField);
+
+        TextView techsButton = (TextView) findViewById(R.id.techsListButton);
+        TextView charsButton = (TextView) findViewById(R.id.charsListButton);
 
         // Loading Font Face
         Typeface tf = Typeface.createFromAsset(getAssets(), fontPath);
 
         // Applying font
-        slName.setTypeface(tf);
-        email.setTypeface(tf);
-        pw.setTypeface(tf);
+
+        techsButton.setTypeface(tf);
+        charsButton.setTypeface(tf);
+
     }
 
     @Override
