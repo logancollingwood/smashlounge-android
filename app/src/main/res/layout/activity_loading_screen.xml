@@ -43,12 +43,11 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login"
-        android:id="@+id/loginButton"
-
+        android:text="Techniques"
+        android:id="@+id/techsListButton"
+        android:onClick="loadTechs"
 
         android:textColor="#FFFFFF"
-        android:textSize="30sp"
 
         android:shadowColor="#A8A8A8"
         android:shadowDx="0"
@@ -57,5 +56,16 @@
         android:layout_below="@+id/pwField"
         android:layout_alignLeft="@+id/pwField"
         android:layout_alignStart="@+id/pwField" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Characters"
+        android:id="@+id/charListButton"
+        android:onClick="loadChars"
+
+        android:layout_below="@+id/techsListButton"
+        android:layout_alignLeft="@+id/techsListButton"
+        android:layout_alignStart="@+id/techsListButton" />
 
 </RelativeLayout>

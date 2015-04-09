@@ -16,6 +16,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".techniques"
+            android:label="@string/title_activity_techniques" >
+        </activity>
+        <activity
+            android:name=".characters"
+            android:label="@string/title_activity_characters" >
+        </activity>
     </application>
+
+
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
 </manifest>

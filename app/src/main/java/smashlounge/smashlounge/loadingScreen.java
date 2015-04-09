@@ -1,10 +1,12 @@
 package smashlounge.smashlounge;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 
@@ -16,6 +18,14 @@ public class loadingScreen extends ActionBarActivity {
         setContentView(R.layout.activity_loading_screen);
 
         initType();
+    }
+    public void loadChars(View view) {
+        Intent intent = new Intent(this, characters.class);
+        startActivity(intent);
+    }
+    public void loadTechs(View view) {
+        Intent intent = new Intent(this, techniques.class);
+        startActivity(intent);
     }
 
     public void initType() {
