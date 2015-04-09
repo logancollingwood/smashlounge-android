@@ -2,6 +2,7 @@ package smashlounge.smashlounge;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -13,6 +14,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
@@ -25,8 +27,6 @@ public class techDetail extends ActionBarActivity {
 
     private static String techsURL = "http://dev.smashlounge.com/api/techniques?tech=";
 
-    //10.0.2.2 is the address used by the Android emulators to refer to the host address
-    // change this to the IP of another host if required
 
     private static String jsonResult = "success";
     private static String jsonKey = "tech";
@@ -42,14 +42,17 @@ public class techDetail extends ActionBarActivity {
         Bundle b = getIntent().getExtras();
         String techName = b.getString("key");
 
+        //Set header of this activity to just be the technique name that was bundled with it
         TextView techTitle = (TextView) findViewById(R.id.techTitle);
         techTitle.setText(techName);
 
         jsonParser = new JSONParser();
 
-
+        //sets up callback
         grabTechDetailsSpec myCallSpec = new grabTechDetailsSpec();
+
         try {
+            //the url is just the base url with a _GET param for the server
             myCallSpec.url = techsURL + URLEncoder.encode(techName, "utf-8");
 
         } catch (UnsupportedEncodingException e) {
@@ -72,6 +75,10 @@ public class techDetail extends ActionBarActivity {
         @Override
         public void useResult(Context context, String result) {
             JSONObject json = null;
+            JSONObject techJson = null;
+
+            JSONArray gifJson = null;
+
             try {
                 json = new JSONObject(result);
             } catch (JSONException e) {
@@ -80,12 +87,12 @@ public class techDetail extends ActionBarActivity {
             }
             try {
                 // Getting JSON Array
-                json = json.getJSONObject(jsonKey);
+                techJson = json.getJSONObject(jsonKey);
 
-                String description = json.getString("description");
-                String inputs = json.getString("inputs");
-                String smashWiki = json.getString("smashwiki");
-
+                String description = techJson.getString("description");
+                String inputs = "inputs: ";
+                inputs += techJson.getString("inputs");
+                String smashWiki = techJson.getString("smashwiki");
 
 
                 TextView techDescription = (TextView) findViewById(R.id.techDescription);
@@ -96,6 +103,39 @@ public class techDetail extends ActionBarActivity {
                 techInputs.setText(inputs);
                 techWiki.setText(smashWiki);
 
+                //Now let's grab gifs!
+                gifJson = json.getJSONArray("gifs");
+
+                Log.d(TAG, "gif JSON: " + gifJson.toString());
+                for (int i = 0; i <= gifJson.length()-1; i++) {
+                    // Storing  JSON item in a Variable
+                    JSONObject c = gifJson.getJSONObject(i);
+
+                    String url = c.getString("url");
+                    String gifDesc = c.getString("description");
+
+                    String webmUrl = "http://zippy.gfycat.com/" + url + ".webm";
+                    Log.d(TAG, url + " " + gifDesc);
+                    MediaPlayer mediaPlayer = new MediaPlayer();
+
+                    try {
+                        mediaPlayer.setDataSource(webmUrl);
+                        mediaPlayer.prepareAsync(); // might take long! (for buffering, etc)
+
+                        mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                            @Override
+                            public void onPrepared(MediaPlayer mp) {
+                                mp.start();
+                            }
+                        });
+
+                    } catch (IOException e) {
+                        Log.d(TAG, "unable to play webm");
+                        return;
+                    }
+
+
+                }
 
                 //addItems(tech);
 
@@ -106,6 +146,7 @@ public class techDetail extends ActionBarActivity {
         }
 
     }
+
 
     public void initType() {
         String fontPath = "fonts/Quicksand-Regular.ttf";
