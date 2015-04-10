@@ -27,10 +27,7 @@ public class techDetail extends ActionBarActivity {
 
     private static String techsURL = "http://dev.smashlounge.com/api/techniques?tech=";
 
-
-    private static String jsonResult = "success";
     private static String jsonKey = "tech";
-    JSONArray resultTechArr = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

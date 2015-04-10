@@ -38,4 +38,16 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:src="@drawable/slogo_white"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/techsListButton"
+        android:layout_alignEnd="@+id/techsListButton"
+        android:layout_marginTop="69dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>
